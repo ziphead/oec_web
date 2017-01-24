@@ -20,7 +20,7 @@ def isHabitable(xmlPair):
         return False # no binary systems (yet)
     spectralTypeMain = getText(star,"./spectraltype","G")[0]
     if spectralTypeMain not in spectraltypes_temp_radii :
-        return False # unsupported spectral type 
+        return False # unsupported spectral type
     semimajoraxis = getFloat(planet,"./semimajoraxis")
     if semimajoraxis is None:
         hostmass = getFloat(star,"./mass",1.)
@@ -40,9 +40,11 @@ def isHabitable(xmlPair):
 
     stellarRadius = getFloat(star,"./radius")
     if stellarRadius is None or stellarRadius<0.01:
-        stellarRadius = 1.
+        #stellarRadius = 1.
         if spectralTypeMain in spectraltypes_temp_radii:
             stellarRadius = spectraltypes_temp_radii[spectralTypeMain][1]
+        else:
+            return False
 
 
     if stellarMass>2.:
